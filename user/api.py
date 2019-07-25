@@ -4,6 +4,7 @@ from lib.sms import send_sms
 from common import errors, keys
 from lib.http import  render_json
 from user.models import User
+from .forms import ProfileModelForm
 
 
 def submit_phone(request):
@@ -45,6 +46,33 @@ def submit_vcode(request):
         return render_json(data=user.to_dict())
     else:
         return render_json(code=errors.VCODE_ERROR, data='验证码错误')
+
+
+def get_profile(request):
+    """获取用户交友资料"""
+    uid = request.session.get('uid')
+    user = User.objects.get(id=uid)
+    return render_json(data=user.profile.to_dict())
+
+
+def edit_profile(request):
+    """django form"""
+    form = ProfileModelForm(request.POST)
+
+    if form.is_valid():
+        # 数据合法的话,就取出数据,并更新profile
+        profile = form.save(commit=False)
+        profile.id = request.session.get('uid')
+        profile.save()
+        return render_json(data=profile.to_dict())
+    else:
+        return render_json(code=errors.PROFILE_ERROR, data=form.errors)
+
+
+
+
+
+
 
 
 
