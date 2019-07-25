@@ -11,3 +11,9 @@ YZX_PARAMS = {
      "param": None,
      "mobile": None,
 }
+
+# 七牛配置
+QN_ACCESS_KEY = 'uTCi4T1X2ozCDwQvzyEjCszNsATntmvKv-8ntFh0'
+QN_SECRET_KEY = 'utEyFUPxY1C_wy8O2k3zbSnUteDhwWbigAGP4VOP'
+QN_BUCKET_NAME = 'sz1902'
+QN_CND_URL = 'http://pv6sn3y15.bkt.clouddn.com/'

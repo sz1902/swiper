@@ -42,8 +42,11 @@ MIDDLEWARE = [
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'lib.middleware.AuthMiddleware'
+
 ]
 
+from django.contrib.sessions.middleware import SessionMiddleware
 ROOT_URLCONF = 'swiper.urls'
 
 TEMPLATES = [
@@ -117,3 +120,5 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
 STATIC_URL = '/static/'
+
+MEDIA_ROOT = 'medias'
