@@ -1,5 +1,9 @@
 from django.utils.deprecation import MiddlewareMixin
 
+
+from common import errors
+from lib.http import render_json
+
 from user.models import User
 
 
@@ -14,5 +18,9 @@ class AuthMiddleware(MiddlewareMixin):
         if request.path in URL_WHITE_LIST:
             return
 
-        uid = request.session.get('uid')
+
+        uid = request.session.get('uid', None)
+        if uid is None:
+            # 说明没登录
+            return render_json(code=errors.LOGIN_REQUIRED, data='请登录')
         request.user = User.objects.get(id=uid)
